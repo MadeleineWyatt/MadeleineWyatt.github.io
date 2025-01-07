@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diversity Initiative Resistance Gamebook</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f0f8ff;
+        }
+        .stage {
+            margin-bottom: 40px;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        .scenario {
+            margin-bottom: 20px;
+            color: #34495e;
+        }
+        .choices {
+            margin: 25px 0;
+            text-align: center; /* Central align the buttons */
+        }
+        button {
+            display: inline-block;
+            margin: 10px 5px 10px 0;
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+        button:hover {
+            background-color: #1c5980;
+        }
+        .hidden {
+            display: none;
+        }
+        .outcome {
+            margin-top: 20px;
+            padding: 20px;
+            border-left: 6px solid;
+            background-color: #ecf0f1;
+            border-color: #27ae60;
+            color: #2c3e50;
+            border-radius: 4px;
+        }
+        .navigation-buttons {
+            margin-top: 20px;
+            text-align: center; /* Central align the navigation buttons */
+        }
+        .back-button {
+            background-color: #95a5a6;
+        }
+        .back-button:hover {
+            background-color: #7f8c8d;
+        }
+        /* Neutral styling for reflection outcomes */
+        .outcome-default {
+            border-color: #27ae60;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+    </style>
+    <script>
+        let score = 0;
+        let historyStack = [];
+        let round6Choice = null; // Variable to track Round 6 choice
+
+        function goToStage(stageId, points = 0) {
+            // Get the currently visible stage
+            const currentStage = document.querySelector('.stage:not(.hidden)');
+            if (currentStage && stageId !== 'introduction') {
+                // Push current stage ID to history stack
+                historyStack.push(currentStage.id);
+            }
+
+            // Update score
+            score += points;
+
+            // Hide all stages
+            document.querySelectorAll('.stage').forEach(stage => stage.classList.add('hidden'));
+
+            // Show the target stage
+            const targetStage = document.getElementById(stageId);
+            if (targetStage) {
+                targetStage.classList.remove('hidden');
+            } else {
+                console.error(`Stage with ID '${stageId}' not found.`);
+                alert(`Oops! The stage '${stageId}' is not found. Please reload the page.`);
+                return;
+            }
+
+            // Reset historyStack and score when restarting the journey
+            if (stageId === 'introduction') {
+                score = 0;
+                historyStack = [];
+                round6Choice = null;
+            }
+        }
+
+        function chooseRound6Option(choice) {
+            round6Choice = choice;
+            // Assign points based on choice and navigate to Round6 Outcome
+            if (choice === 1) {
+                goToStage('Round6_Outcome1', 3);
+            } else if (choice === 2) {
+                goToStage('Round6_Outcome2', 2);
+            } else if (choice === 3) {
+                goToStage('Round6_Outcome3', 1);
+            }
+        }
+
+        function goBack() {
+            if (historyStack.length === 0) {
+                alert("You are at the beginning of your journey.");
+                return;
+            }
+            const previousStageId = historyStack.pop();
+            // Navigate to the previous stage without altering the score
+            navigateToStage(previousStageId);
+        }
+
+        function navigateToStage(stageId) {
+            // Hide all stages
+            document.querySelectorAll('.stage').forEach(stage => stage.classList.add('hidden'));
+
+            // Show the target stage
+            const targetStage = document.getElementById(stageId);
+            if (targetStage) {
+                targetStage.classList.remove('hidden');
+            } else {
+                console.error(`Stage with ID '${stageId}' not found.`);
+                alert(`Oops! The stage '${stageId}' is not found. Please reload the page.`);
+                return;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Diversity Initiative Resistance Gamebook</h1>
+    <p><em>Developed by Dr. Madeleine Wyatt and ChatGPT was used to generate the code.</em></p>
+
+    <!-- Introduction Stage -->
+    <div class="stage" id="introduction">
+        <div class="title">Welcome to Your New Role as a D&I Change Agent</div>
+        <p>You are the Head of Diversity, Equity, and Inclusion (DEI) for a regional branch of a national law firm. You’ve identified systemic bias in the recruitment and selection processes and designed a new system to address this. Your goal is to navigate resistance at each stage of implementation to embed this system successfully.</p>
+        
+        <div class="scenario">
+            <p>The current recruitment and selection processes in your region exhibit several issues:</p>
+            <ul>
+                <li>Without much structure the process is open to bias</li>
+                <li>Vague criteria (e.g., ‘candidate must be a people person’) which allows people to bend the process in favour of people they like rather than those who perform well</li>
+                <li>Inconsistently applied so candidates cannot be fairly compared</li>
+                <li>Relies on vague ‘very poor-very good’ assessments of candidates which can be flexed to (dis)advantage candidates</li>
+                <li>Panel shares no common mental model about what is being assessed so decisions are inconsistent and often result in no hires being made, which is costly to the firm</li>
+            </ul>
+            <p>To reduce systemic bias, you decide that the content of the recruitment system needs to be redesigned, including new criteria, criteria-related interview questions, and clear rating criteria.</p>
+            <p>Your task is to navigate organizational resistance to implement this change effectively.</p>
+        </div>
+        
+        <div class="navigation-buttons">
+            <button onclick="goToStage('choosingStakeholders')">Begin Your Mission</button>
+        </div>
+    </div>
+
+    <!-- Round 1: Choosing Who to Present To -->
+    <div class="stage hidden" id="choosingStakeholders">
+        <div class="title">Round 1: Choosing Who to Present To</div>
+        <div class="scenario">
+            <p>You need to present your diversity initiative to key stakeholders. Correctly identifying who has the most influence is crucial for gaining their support.</p>
+            <p>Consider the following stakeholders:</p>
+            <ul>
+                <li><strong>Linda</strong>, Senior Partner in Central HQ – Advocates for ethical practices and inclusion.</li>
+                <li><strong>Samantha</strong>, Head of HR – Supportive but cautious about integrating new processes.</li>
+                <li><strong>Regional Senior Management Team</strong> – Includes Margaret (Regional Operations Director), Ian (Head of Corporate Law), and others focused on operational efficiency.</li>
+            </ul>
+            <p>Who do you get on board first?</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round1_Linda_Outcome', 1)">Present to Linda, the Senior Partner</button>
+            <button onclick="goToStage('Round1_Samantha_Outcome', 2)">Present to Samantha, the Head of HR</button>
+            <button onclick="goToStage('Round1_SeniorMgmt_Outcome', 2)">Present to the Regional Senior Management Team</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round1 Outcome: Present to Linda -->
+    <div class="stage hidden" id="Round1_Linda_Outcome">
+        <div class="title">Outcome: Presenting to Linda, the Senior Partner</div>
+        <div class="scenario">
+            <p>Linda thinks it's a good idea but doesn't really get involved in operations at the regional level. The HR and EDI teams find out that you're trying to change the recruitment system without involving them. This negatively impacts your reputation across the firm and people are less trusting of the initiative. The project fails. (go back and try again)</p>
+        </div>
+        <div class="choices">
+            <button onclick="navigateToStage('choosingStakeholders')">Go Back and Try Again</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round1 Outcome: Present to Samantha -->
+    <div class="stage hidden" id="Round1_Samantha_Outcome">
+        <div class="title">Outcome: Presenting to Samantha, the Head of HR</div>
+        <div class="scenario">
+            <p>HR isn't happy with you meddling with central processes. They allow you to continue but want weekly updates and, if successful, will want to badge the project as theirs so you lose any credit for the work.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('choosingArgument')">Continue to Round 2</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round1 Outcome: Present to Regional Senior Management Team -->
+    <div class="stage hidden" id="Round1_SeniorMgmt_Outcome">
+        <div class="title">Outcome: Presenting to the Regional Senior Management Team</div>
+        <div class="scenario">
+            <p>By bringing all senior managers together, they are keen to be seen supporting diversity. However, they ask you to go back and get permission from the central HR and EDI teams.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round1_Samantha_Outcome', 0)">Proceed to Present to Samantha, the Head of HR</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round 2: Choosing Which Argument to Use -->
+    <div class="stage hidden" id="choosingArgument">
+        <div class="title">Round 2: Choosing Which Argument to Use</div>
+        <div class="scenario">
+            <p>After speaking with HR you go ahead and speak to the managers in your regional office. You need to decide which type of argument will persuade them to change the recruitment system for a fairer process.</p>
+            <p>Choose the most suitable argument:</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round2_Business_Outcome', 3)">Use a Business Argument (e.g., improved talent retention and innovation)</button>
+            <button onclick="goToStage('Round2_Moral_Outcome', 1)">Use a Moral Argument (e.g., ethical responsibility and inclusion)</button>
+            <button onclick="goToStage('Round2_Legal_Outcome', 1)">Use a Legal Argument (e.g., compliance with diversity laws and regulations)</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round2 Outcome: Business Argument -->
+    <div class="stage hidden" id="Round2_Business_Outcome">
+        <div class="title">Outcome: Using a Business Argument</div>
+        <div class="scenario">
+            <p>You present comprehensive data to support the business case for the diversity initiative. Managers are generally supportive, recognizing the potential for improved talent retention and innovation. However, some justify the data by stating the candidate pool is poor. A few managers ask you to collect more data to prove there's an issue. You receive the go-ahead, but this request delays the project.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round3_PersuadeManagers')">Continue to Round 3</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round2 Outcome: Moral Argument -->
+    <div class="stage hidden" id="Round2_Moral_Outcome">
+        <div class="title">Outcome: Using a Moral Argument</div>
+        <div class="scenario">
+            <p>Managers respond by invoking systems justification theory, saying things like:</p>
+            <ul>
+                <li>"We already have a meritocracy here."</li>
+                <li>"If people from minority backgrounds aren't getting hired, it's because they aren't good quality candidates, and we want to hire good people, regardless of their background."</li>
+                <li>"We need to be careful we don't disadvantage white candidates; it feels like the real victims here are white men with all these diversity initiatives."</li>
+            </ul>
+            <p>They also express a desire to know more about the business benefits.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('choosingArgument')">Back to Round 2: Choose Argument Again</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round2 Outcome: Legal Argument -->
+    <div class="stage hidden" id="Round2_Legal_Outcome">
+        <div class="title">Outcome: Using a Legal Argument</div>
+        <div class="scenario">
+            <p>Regional managers aren't too concerned with this issue, viewing it as a central HR matter. The central HR team doesn't think you have a point, stating they have already checked their systems are legally defensible. They question why any resources should be invested into this scheme.</p>
+            <p>They suggest you revisit the business case.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('choosingArgument')">Back to Round 2: Choose Argument Again</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round 3: Persuading Influential Managers -->
+    <div class="stage hidden" id="Round3_PersuadeManagers">
+        <div class="title">Round 3: Persuading Influential Managers</div>
+        <div class="scenario">
+            <p>As people get to hear about the proposed changes, three influential managers—Kevin, Carol, and Martin—are vocal about their opposition to the new process. They already think the recruitment system takes up far too much of their time and a new process will only increase the administration load. But you need these three on your side otherwise the recruitment process won't get off the ground. How do you persuade them?</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round3_Option1_Outcome', 1)">Reiterate the business benefits of the proposed system focusing on widening the talent pool.</button>
+            <button onclick="goToStage('Round3_Option2_Outcome', 3)">Highlight the number of failed recruitment rounds in the last year which could be solved if the process had clearer criteria and better agreement amongst panel members. Present the new system as a way to reduce administration load.</button>
+            <button onclick="goToStage('Round3_Option3_Outcome', 1)">Explain that administration is a necessary evil for a recruitment system that reduces bias.</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round3 Outcome: Option 1 -->
+    <div class="stage hidden" id="Round3_Option1_Outcome">
+        <div class="title">Outcome: Reiterating Business Benefits</div>
+        <div class="scenario">
+            <p>You reiterate the business benefits of the proposed system, focusing on widening the talent pool. However, Kevin, Carol, and Martin remain unconvinced. They are only concerned with short-term results and reducing their administration load. They are not swayed by the long-term benefits and remain resistant to the new process.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round3_PersuadeManagers')">Back to Round 3: Persuade Managers Again</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round3 Outcome: Option 2 -->
+    <div class="stage hidden" id="Round3_Option2_Outcome">
+        <div class="title">Outcome: Highlighting Failed Recruitment Rounds</div>
+        <div class="scenario">
+            <p>You highlight the number of failed recruitment rounds in the last year, emphasizing how the new system with clearer criteria and better agreement amongst panel members can solve these issues. You present the new system as a way to reduce administration load. Kevin, Carol, and Martin are convinced by your argument. They recognize the immediate benefits and agree to support the new recruitment process.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round4_GainingCompliance')">Continue to Round 4</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round3 Outcome: Option 3 -->
+    <div class="stage hidden" id="Round3_Option3_Outcome">
+        <div class="title">Outcome: Explaining Administration as Necessary</div>
+        <div class="scenario">
+            <p>You explain that administration is a necessary evil for a recruitment system that reduces bias. However, Kevin, Carol, and Martin reject this argument, stating they would want more data about the need for such a system before they commit to increased administration loads. They remain unconvinced and continue to oppose the new process.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round3_PersuadeManagers')">Back to Round 3: Persuade Managers Again</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round 4: Gaining Compliance -->
+    <div class="stage hidden" id="Round4_GainingCompliance">
+        <div class="title">Round 4: Gaining Compliance</div>
+        <div class="scenario">
+            <p>Your stakeholders have agreed to implement a new recruitment process on a trial basis. The next step is to ensure they actually do this. How do you gain their compliance with the trial?</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round4_Option3_Outcome', 3)">Provide comprehensive training to all staff who use recruitment processes and offer to shadow recruitment rounds to support the implementation in real time.</button>
+            <button onclick="goToStage('Round4_Option2_Outcome', 2)">Provide a one-off training event explaining the benefits of the new system for anyone who wants to attend.</button>
+            <button onclick="goToStage('Round4_Option1_Outcome', 1)">Mandate the use of the new system through formal directives.</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round4 Outcome: Option 3 -->
+    <div class="stage hidden" id="Round4_Option3_Outcome">
+        <div class="title">Outcome: Comprehensive Training and Shadowing</div>
+        <div class="scenario">
+            <p>This approach is heavily resource-intensive. You spend hours shadowing recruitment rounds, but it effectively helps people use the new system. The implementation proceeds smoothly with high compliance.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round5_EmbeddingSystem')">Continue to Round 5</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round4 Outcome: Option 2 -->
+    <div class="stage hidden" id="Round4_Option2_Outcome">
+        <div class="title">Outcome: One-off Training Event</div>
+        <div class="scenario">
+            <p>Most people don't attend the training session, and as a result, people are unsure about whether the new or old system is in operation. They need more support.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round4_GainingCompliance')">Back to Round 4: Gain Compliance Again</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round4 Outcome: Option 1 -->
+    <div class="stage hidden" id="Round4_Option1_Outcome">
+        <div class="title">Outcome: Mandate Use through Directives</div>
+        <div class="scenario">
+            <p>Managers do not take kindly to being told to use a new system when they thought the old one was perfectly fine. You will need to explain the process in more detail.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round4_GainingCompliance')">Back to Round 4: Gain Compliance Again</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round 5: Embedding the New System -->
+    <div class="stage hidden" id="Round5_EmbeddingSystem">
+        <div class="title">Round 5: Embedding the New System</div>
+        <div class="scenario">
+            <p>With stakeholder compliance secured, your goal is to embed the new recruitment system so that it replaces the old one and becomes the standard practice.</p>
+            <p>What strategy do you use to embed the new system?</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round5_Option1_Outcome', 3)">Integrate the new system into all company policies and procedures</button>
+            <button onclick="goToStage('Round5_Option2_Outcome', 2)">Provide incentives for departments that fully adopt the new system</button>
+            <button onclick="goToStage('Round5_Option3_Outcome', 1)">Enforce the transition through strict compliance checks</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round5 Outcome: Option 1 -->
+    <div class="stage hidden" id="Round5_Option1_Outcome">
+        <div class="title">Outcome: Integrating into Policies and Procedures</div>
+        <div class="scenario">
+            <p>This is ambitious and requires another year or more of negotiation with the owners of each process. However, after a long campaign with stakeholders, you manage to embed the process so it becomes part of everyday working practice, and the old system fades.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round6_TrainingPanels')">Continue to Round 6</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round5 Outcome: Option 2 -->
+    <div class="stage hidden" id="Round5_Option2_Outcome">
+        <div class="title">Outcome: Providing Incentives</div>
+        <div class="scenario">
+            <p>Despite wanting to offer incentives you have run out of budget to do so and people quickly revert back to the old system. Try again.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round5_EmbeddingSystem')">Back to Round 5: Embedding the New System Again</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round5 Outcome: Option 3 -->
+    <div class="stage hidden" id="Round5_Option3_Outcome">
+        <div class="title">Outcome: Enforcing Transition through Compliance Checks</div>
+        <div class="scenario">
+            <p>Hiring managers pretend to use the new process correctly, but when shadowing rounds, you notice they bend and flex the system and undermine it despite seemingly being compliant. Try again.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('Round5_EmbeddingSystem')">Back to Round 5: Embedding the New System Again</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round 6: Training Interview Panel Members -->
+    <div class="stage hidden" id="Round6_TrainingPanels">
+        <div class="title">Round 6: Training Interview Panel Members</div>
+        <div class="scenario">
+            <p>To ensure the new recruitment system is effective, all interview panel members need to undergo diversity training.</p>
+            <p>How do you encourage them to participate in the training?</p>
+        </div>
+        <div class="choices">
+            <button onclick="chooseRound6Option(1)">Integrate content about diversity and inclusion into the training on how to use the recruitment system. Require all hiring managers to have completed the training.</button>
+            <button onclick="chooseRound6Option(2)">Highlight the benefits of diversity training and provide flexible scheduling for people to attend.</button>
+            <button onclick="chooseRound6Option(3)">Mandate diversity training and require people to indicate their compliance in performance reviews.</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round6 Outcome: Option 1 -->
+    <div class="stage hidden" id="Round6_Outcome1">
+        <div class="title">Outcome: Integrated Training</div>
+        <div class="scenario">
+            <p>You integrate content about diversity and inclusion into the training on how to use the recruitment system. All hiring managers complete the training, leading to a more consistent and unbiased recruitment process.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('reflection')">Proceed to Reflection</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round6 Outcome: Option 2 -->
+    <div class="stage hidden" id="Round6_Outcome2">
+        <div class="title">Outcome: Flexible Training Scheduling</div>
+        <div class="scenario">
+            <p>You highlight the benefits of diversity training and provide flexible scheduling for people to attend. A handful of people participate, but many miss the sessions, leading to inconsistent application of the new recruitment system.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('reflection')">Proceed to Reflection</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Round6 Outcome: Option 3 -->
+    <div class="stage hidden" id="Round6_Outcome3">
+        <div class="title">Outcome: Mandated Training</div>
+        <div class="scenario">
+            <p>You mandate diversity training and require people to indicate their compliance in performance reviews. While compliance is high, some hiring managers feel resentful and begin to undermine the training's objectives, leading to subtle biases in the recruitment process.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('reflection')">Proceed to Reflection</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Reflection Stage -->
+    <div class="stage hidden" id="reflection">
+        <div class="title">Reflection</div>
+        <div class="reflection-content">
+            <p><strong>How successful did you think your D&I intervention was?</strong></p>
+            <p>Consider the overall impact of your actions and decisions throughout the process.</p>
+            <p><strong>What theory aligns with the resistance you met along the way?</strong></p>
+            <p>Think about which organizational or psychological theories explain the resistance you encountered.</p>
+            <p><strong>What would you do differently?</strong></p>
+            <p>Reflect on strategies or approaches you might change in future similar initiatives.</p>
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('restartReflection')">Proceed to Restart</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <!-- Restart Reflection Stage -->
+    <div class="stage hidden" id="restartReflection">
+        <div class="title">Restart the Journey</div>
+        <div class="reflection-content">
+            <p>Thank you for participating in the Diversity Initiative Resistance Gamebook!</p>
+            
+        </div>
+        <div class="choices">
+            <button onclick="goToStage('introduction')">Restart the Journey</button>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+</body>
+</html>
