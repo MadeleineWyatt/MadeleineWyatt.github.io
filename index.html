@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diversity Initiative Resistance Gamebook</title>
+    <title>Diversity Initiative Resistance Game</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -155,12 +155,12 @@
 </head>
 <body>
     <h1>Diversity Initiative Resistance Gamebook</h1>
-    <p><em>Developed by Dr. Madeleine Wyatt and ChatGPT was used to generate the code.</em></p>
+    <p><em>Developed by Dr. Madeleine Wyatt. ChatGPT 4.0 was used to generate and refine the code for this online game.</em></p>
 
     <!-- Introduction Stage -->
     <div class="stage" id="introduction">
         <div class="title">Welcome to Your New Role as a D&I Change Agent</div>
-        <p>You are the Head of Diversity, Equity, and Inclusion (DEI) for a regional branch of a national law firm. You’ve identified systemic bias in the recruitment and selection processes and designed a new system to address this. Your goal is to navigate resistance at each stage of implementation to embed this system successfully.</p>
+        <p>You are the Head of Diversity, Equity, and Inclusion (DEI) for a regional branch of a national law firm. You’ve identified systemic bias in the recruitment and selection processes.</p>
         
         <div class="scenario">
             <p>The current recruitment and selection processes in your region exhibit several issues:</p>
@@ -172,7 +172,7 @@
                 <li>Panel shares no common mental model about what is being assessed so decisions are inconsistent and often result in no hires being made, which is costly to the firm</li>
             </ul>
             <p>To reduce systemic bias, you decide that the content of the recruitment system needs to be redesigned, including new criteria, criteria-related interview questions, and clear rating criteria.</p>
-            <p>Your task is to navigate organizational resistance to implement this change effectively.</p>
+            <p>Your task is to navigate organisational resistance to implement this change effectively.</p>
         </div>
         
         <div class="navigation-buttons">
@@ -188,10 +188,10 @@
             <p>Consider the following stakeholders:</p>
             <ul>
                 <li><strong>Linda</strong>, Senior Partner in Central HQ – Advocates for ethical practices and inclusion.</li>
-                <li><strong>Samantha</strong>, Head of HR – Supportive but cautious about integrating new processes.</li>
+                <li><strong>Samantha</strong>, Head of HR – Responsible for employee resourcing inclduing hiring and recruitment.</li>
                 <li><strong>Regional Senior Management Team</strong> – Includes Margaret (Regional Operations Director), Ian (Head of Corporate Law), and others focused on operational efficiency.</li>
             </ul>
-            <p>Who do you get on board first?</p>
+            <p>Who do you pitch the project to first? </p>
         </div>
         <div class="choices">
             <button onclick="goToStage('Round1_Linda_Outcome', 1)">Present to Linda, the Senior Partner</button>
@@ -207,7 +207,7 @@
     <div class="stage hidden" id="Round1_Linda_Outcome">
         <div class="title">Outcome: Presenting to Linda, the Senior Partner</div>
         <div class="scenario">
-            <p>Linda thinks it's a good idea but doesn't really get involved in operations at the regional level. The HR and EDI teams find out that you're trying to change the recruitment system without involving them. This negatively impacts your reputation across the firm and people are less trusting of the initiative. The project fails. (go back and try again)</p>
+            <p>Linda thinks it's a good idea but doesn't really get involved in operations at the regional level. The HR and EDI teams find out that you're trying to change the recruitment system without involving them. This negatively impacts your reputation across the firm and people are less trusting of the initiative. The project looks like it will fail before it has got off the ground. (go back and try again)</p>
         </div>
         <div class="choices">
             <button onclick="navigateToStage('choosingStakeholders')">Go Back and Try Again</button>
@@ -249,7 +249,7 @@
     <div class="stage hidden" id="choosingArgument">
         <div class="title">Round 2: Choosing Which Argument to Use</div>
         <div class="scenario">
-            <p>After speaking with HR you go ahead and speak to the managers in your regional office. You need to decide which type of argument will persuade them to change the recruitment system for a fairer process.</p>
+            <p>After speaking with HR you go ahead and speak to the managers in your regional office. As these are the individuals actively using the recruitment system you need to decide which type of argument will persuade them to change the recruitment system for a fairer process.</p>
             <p>Choose the most suitable argument:</p>
         </div>
         <div class="choices">
@@ -266,7 +266,7 @@
     <div class="stage hidden" id="Round2_Business_Outcome">
         <div class="title">Outcome: Using a Business Argument</div>
         <div class="scenario">
-            <p>You present comprehensive data to support the business case for the diversity initiative. Managers are generally supportive, recognizing the potential for improved talent retention and innovation. However, some justify the data by stating the candidate pool is poor. A few managers ask you to collect more data to prove there's an issue. You receive the go-ahead, but this request delays the project.</p>
+            <p>You present comprehensive data to support the business case for the diversity initiative, including applicant, shortlisted and appointed data for men/women and ethnically marginalised groups. Managers are generally supportive, recognising the potential for improved talent retention and innovation. However, some justify the data by stating the candidate pool is poor. A few managers ask you to collect more data to prove there's an issue. You receive the go-ahead, but this request delays the project.</p>
         </div>
         <div class="choices">
             <button onclick="goToStage('Round3_PersuadeManagers')">Continue to Round 3</button>
@@ -280,11 +280,11 @@
     <div class="stage hidden" id="Round2_Moral_Outcome">
         <div class="title">Outcome: Using a Moral Argument</div>
         <div class="scenario">
-            <p>Managers respond by invoking systems justification theory, saying things like:</p>
+            <p>Managers are not particularly receptive to this argument, saying things like:</p>
             <ul>
                 <li>"We already have a meritocracy here."</li>
                 <li>"If people from minority backgrounds aren't getting hired, it's because they aren't good quality candidates, and we want to hire good people, regardless of their background."</li>
-                <li>"We need to be careful we don't disadvantage white candidates; it feels like the real victims here are white men with all these diversity initiatives."</li>
+                <li>"We need to be careful we don't disadvantage White candidates; it feels like the real victims here are White men with all these diversity initiatives."</li>
             </ul>
             <p>They also express a desire to know more about the business benefits.</p>
         </div>
@@ -315,11 +315,11 @@
     <div class="stage hidden" id="Round3_PersuadeManagers">
         <div class="title">Round 3: Persuading Influential Managers</div>
         <div class="scenario">
-            <p>As people get to hear about the proposed changes, three influential managers—Kevin, Carol, and Martin—are vocal about their opposition to the new process. They already think the recruitment system takes up far too much of their time and a new process will only increase the administration load. But you need these three on your side otherwise the recruitment process won't get off the ground. How do you persuade them?</p>
+            <p>As people get to hear about the proposed changes, three influential managers—Kevin, Carol, and Martin—are vocal about their opposition to the new process. They already think the recruitment system takes up far too much of their time and a new process will only increase their administration load. But you need these three on your side otherwise the recruitment process won't get off the ground. How do you persuade them?</p>
         </div>
         <div class="choices">
-            <button onclick="goToStage('Round3_Option1_Outcome', 1)">Reiterate the business benefits of the proposed system focusing on widening the talent pool.</button>
-            <button onclick="goToStage('Round3_Option2_Outcome', 3)">Highlight the number of failed recruitment rounds in the last year which could be solved if the process had clearer criteria and better agreement amongst panel members. Present the new system as a way to reduce administration load.</button>
+            <button onclick="goToStage('Round3_Option1_Outcome', 1)">Reiterate the business benefits of the proposed system focusing on widening the talent pool to recruit the best candidates.</button>
+            <button onclick="goToStage('Round3_Option2_Outcome', 3)">Highlight the number of failed recruitment rounds per year. Suggest the new system could reduce this administration load.</button>
             <button onclick="goToStage('Round3_Option3_Outcome', 1)">Explain that administration is a necessary evil for a recruitment system that reduces bias.</button>
         </div>
         <div class="navigation-buttons">
@@ -345,7 +345,7 @@
     <div class="stage hidden" id="Round3_Option2_Outcome">
         <div class="title">Outcome: Highlighting Failed Recruitment Rounds</div>
         <div class="scenario">
-            <p>You highlight the number of failed recruitment rounds in the last year, emphasizing how the new system with clearer criteria and better agreement amongst panel members can solve these issues. You present the new system as a way to reduce administration load. Kevin, Carol, and Martin are convinced by your argument. They recognize the immediate benefits and agree to support the new recruitment process.</p>
+            <p>You highlight the number of failed recruitment rounds in the last year, emphasizing how the new system with clearer criteria and better agreement amongst panel members can solve these issues. You present the new system as a way to reduce administration load. Kevin, Carol, and Martin are convinced by your argument. They recognise the immediate benefits and agree to support the new recruitment process.</p>
         </div>
         <div class="choices">
             <button onclick="goToStage('Round4_GainingCompliance')">Continue to Round 4</button>
@@ -376,9 +376,9 @@
             <p>Your stakeholders have agreed to implement a new recruitment process on a trial basis. The next step is to ensure they actually do this. How do you gain their compliance with the trial?</p>
         </div>
         <div class="choices">
-            <button onclick="goToStage('Round4_Option3_Outcome', 3)">Provide comprehensive training to all staff who use recruitment processes and offer to shadow recruitment rounds to support the implementation in real time.</button>
-            <button onclick="goToStage('Round4_Option2_Outcome', 2)">Provide a one-off training event explaining the benefits of the new system for anyone who wants to attend.</button>
-            <button onclick="goToStage('Round4_Option1_Outcome', 1)">Mandate the use of the new system through formal directives.</button>
+            <button onclick="goToStage('Round4_Option3_Outcome', 3)">Provide comprehensive training to all recruitment panels and offer to shadow recruitment rounds to support the implementation in real time.</button>
+            <button onclick="goToStage('Round4_Option2_Outcome', 2)">Provide a one-off online training event explaining the benefits of the new system for anyone who wants to attend.</button>
+            <button onclick="goToStage('Round4_Option1_Outcome', 1)">Mandate the use of the new system through formal directives. Send out all-staff emails saying the new system must be followed.</button>
         </div>
         <div class="navigation-buttons">
             <button class="back-button" onclick="goBack()">Back</button>
@@ -417,7 +417,7 @@
     <div class="stage hidden" id="Round4_Option1_Outcome">
         <div class="title">Outcome: Mandate Use through Directives</div>
         <div class="scenario">
-            <p>Managers do not take kindly to being told to use a new system when they thought the old one was perfectly fine. You will need to explain the process in more detail.</p>
+            <p>Managers do not take kindly to being told they 'must' use a new system when they thought the old one was perfectly fine. You will need to explain the process in more detail.</p>
         </div>
         <div class="choices">
             <button onclick="goToStage('Round4_GainingCompliance')">Back to Round 4: Gain Compliance Again</button>
@@ -495,7 +495,7 @@
         </div>
         <div class="choices">
             <button onclick="chooseRound6Option(1)">Integrate content about diversity and inclusion into the training on how to use the recruitment system. Require all hiring managers to have completed the training.</button>
-            <button onclick="chooseRound6Option(2)">Highlight the benefits of diversity training and provide flexible scheduling for people to attend.</button>
+            <button onclick="chooseRound6Option(2)">Highlight the benefits of diversity training and provide flexible scheduling for people to attend online sessions provided by the central EDI team.</button>
             <button onclick="chooseRound6Option(3)">Mandate diversity training and require people to indicate their compliance in performance reviews.</button>
         </div>
         <div class="navigation-buttons">
@@ -552,7 +552,7 @@
             <p><strong>How successful did you think your D&I intervention was?</strong></p>
             <p>Consider the overall impact of your actions and decisions throughout the process.</p>
             <p><strong>What theory aligns with the resistance you met along the way?</strong></p>
-            <p>Think about which organizational or psychological theories explain the resistance you encountered.</p>
+            <p>Think about which organisational or psychological theories explain the resistance you encountered.</p>
             <p><strong>What would you do differently?</strong></p>
             <p>Reflect on strategies or approaches you might change in future similar initiatives.</p>
         </div>
@@ -568,7 +568,7 @@
     <div class="stage hidden" id="restartReflection">
         <div class="title">Restart the Journey</div>
         <div class="reflection-content">
-            <p>Thank you for participating in the Diversity Initiative Resistance Gamebook!</p>
+            <p>Thank you for participating in the Diversity Initiative Resistance Game!</p>
             
         </div>
         <div class="choices">
